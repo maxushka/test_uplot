@@ -10,36 +10,38 @@ class UPlot extends React.Component {
   constructor(props) {
     super(props);
     this.length = 2048;
-    this.state = {stop_update: 0};
+    this.state = {
+      stop_update: 0,
+      xMin: 800,
+      xMax: 1150
+    };
     this.onClick = this.onClick.bind(this);
   }
-
-
   componentDidMount(){
-    
+
     this.data = this.getData();
-    const opts = {
+    this.opts = {
       title: "Rand series",
       width: 1190,
       height: 500,
       pxAlign: false,
-        select: {
-          over: false,
-        },
-        cursor: {
-          drag: {
-            x: true,
-            y: false
-          },
-          sync: {
-            key: "moo"
-          }
-        },
+        // select: {
+        //   over: true,
+        // },
+        // cursor: {
+        //   drag: {
+        //     x: true,
+        //     y: false
+        //   },
+        //   sync: {
+        //     key: "moo"
+        //   }
+        // },
       scales: {
         "x": {
           time: false,
           distr: 1,
-          range: [800, 1300],
+          range: [800, 1300]
         }
       //   y: {
       //     auto: false,
@@ -53,24 +55,24 @@ class UPlot extends React.Component {
       //   dash: [],
       //   size: 10,
       // },
-      axes: [
-        {},
-        {
-      grid: {
-        show: true,
-        stroke: "#eee",
-        width: 2,
-        dash: [],
-      },
-      ticks: {
-        show: true,
-        stroke: "#eee",
-        width: 2,
-        dash: [],
-        size: 10,
-      }
-        }
-      ],
+      // axes: [
+      //   {},
+      //   {
+      // grid: {
+      //   show: true,
+      //   stroke: "#eee",
+      //   width: 2,
+      //   dash: [],
+      // },
+      // ticks: {
+      //   show: true,
+      //   stroke: "#eee",
+      //   width: 2,
+      //   dash: [],
+      //   size: 10,
+      // }
+      //   }
+      // ],
       series: [
         {},
         {
@@ -84,15 +86,28 @@ class UPlot extends React.Component {
           setSelect: [
             uRanger => {
               // var pos = 1;
-              var a = uRanger.posToVal("left", "x");
+              // var a = uRanger.posToVal(left, "x");
               // console.log(a);
-              console.log(a);
+              // console.log();
+              // console.log(uRanger.posToVal(uRanger.cursor.top, "x"));
+              let left = uRanger.posToVal(uRanger.cursor.left, "x");
+              let top = uRanger.posToVal(uRanger.cursor.top, "x");
+              this.setState({
+                    xMin:left,
+                    xMax: top
+                  });
+              // clearInterval(this.timerID);
+              this.setState({stop_update:1});
+              uRanger.destroy();
+              this.plot = new UPlotObj(this.opts, this.data, document.getElementById('plot_1') );
+              this.setState({xMin:left, xMax:top});
+              this.setState({stop_update:0});
             }
           ]
         }
     };
 
-    this.plot = new UPlotObj(opts, this.data, document.getElementById('plot_1') );
+    this.plot = new UPlotObj(this.opts, this.data, document.getElementById('plot_1') );
 
     this.timerID = setInterval(
       () => this.update(),
