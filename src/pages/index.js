@@ -1,3 +1,3 @@
 export { default as HomePage } from './home/home';
-export { default as ProfilePage } from './profile/profile';
-export { default as TasksPage } from './tasks/tasks';
+export { default as ObjectsPage } from './soft-structure/objects/objects';
+export { default as ObjectsSettingsPage } from './soft-structure/settings/settings';

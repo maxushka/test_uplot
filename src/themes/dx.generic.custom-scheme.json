@@ -1,0 +1,17 @@
+{
+    "items": [
+        {
+            "key": "$base-success",
+            "value": "rgba(103, 166, 70, 1)"
+        },
+        {
+            "key": "$base-danger",
+            "value": "rgba(212, 6, 30, 1)"
+        }
+    ],
+    "baseTheme": "generic.greenmist",
+    "outputColorScheme": "custom-scheme",
+    "makeSwatch": false,
+    "version": "20.2.6",
+    "widgets": []
+}

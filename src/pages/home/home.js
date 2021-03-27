@@ -7,11 +7,10 @@ import './home.scss';
 
 export default () => (
   <React.Fragment>
-    <h2 className={'content-block'}>Home</h2>
+    <h2 className={'content-block'}>Домашняя страница</h2>
     <div className={'content-block'}>
       <div className={'dx-card responsive-paddings'}>
         
-        <LCharts/>
       </div>
     </div>
   </React.Fragment>
